@@ -67,7 +67,7 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   #   passwd = "toor";
   #   packages = with pkgs; [
-  #     firefox
+        firefox-esr
   #     thunderbird
   #   ];
   };
