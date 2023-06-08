@@ -29,7 +29,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "zh_CN.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     # keyMap = "us";
@@ -37,6 +37,10 @@
   };
 
   nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
+
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
@@ -54,6 +58,13 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  # Enable unfree repo
+  # nixpkgs.config.allowUnfree = true;
+
+  # VBox Guest Additions
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.x11 = true;
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -67,7 +78,7 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   #   passwd = "toor";
   #   packages = with pkgs; [
-        firefox-esr
+  #     firefox
   #     thunderbird
   #   ];
   };
@@ -80,8 +91,14 @@
     neofetch
     git
     man
-    python
   ];
+
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    source-code-pro
+];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
